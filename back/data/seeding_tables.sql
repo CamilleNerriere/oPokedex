@@ -404,4 +404,14 @@ VALUES
   (151, 12)
 ;
 
+INSERT INTO "team" 
+  ("id", "name", "description")
+VALUES
+  (1, 'Team Rocket', 'De retour, pour vous jouer un mauvais tour'),
+  (2, 'Team Aqua', 'Ils n ont pas le mal de mer'),
+  (3, 'Team Galaxie', 'Toujours du bon côté')
+;
+
+SELECT setval('team_id_seq', (SELECT MAX(id) from "team"));
+
 COMMIT;
