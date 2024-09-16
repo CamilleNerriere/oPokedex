@@ -33,4 +33,4 @@ Team.belongsToMany(Pokemon, {
     otherKey: 'pokemon_id',
 }); 
 
-export {Pokemon, Team, Type, sequelize};
+export {Pokemon, Team, Type, PokemonType, TeamPokemon, sequelize};

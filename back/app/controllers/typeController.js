@@ -19,9 +19,8 @@ const typeController = {
         }
     );
 
-        res.json(type); 
-        
-    }
+        res.json(type);   
+    }, 
 }
 
 export {typeController}
