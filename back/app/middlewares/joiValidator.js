@@ -23,6 +23,28 @@ const joiValidator = {
     
         next();
     },
+    validatePokemonName(req, res, next) {
+        const {name} = req.params;
+
+        const schema = Joi.object({
+            name: Joi.string().min(3).required().messages({
+                'string.empty': 'Le champ name ne doit pas être vide.',
+                'string.min':
+                        'Le name doit contenir au moins {#limit} caractères.',
+                'any.required': 'Le champ name est obligatoire.',
+            }),
+        });
+    
+        const { error } = schema.validate({ name});
+    
+    
+        if (error) {
+            return next(error);
+        }
+    
+        next();
+        
+    }
 }
 
 export {joiValidator}; 

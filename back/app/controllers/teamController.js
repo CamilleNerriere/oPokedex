@@ -46,8 +46,16 @@ const teamController = {
 
         res.json(updatedTeam);
     }, 
-    async storePokemon(req, res){
+    async storePokemon(req, res, next){
         const {pokemon_id, team_id} = req.params; 
+
+        const pokemonsAlreadyInTeam = await TeamPokemon.count({
+            where: {team_id}
+        })
+
+        if(pokemonsAlreadyInTeam > 6){
+            return next(new Error('Nombre de pokemon maximum atteint'));
+        }
 
         const addedPokemon = await TeamPokemon.create({pokemon_id, team_id});
 
@@ -67,6 +75,19 @@ const teamController = {
        await teamPokemonAssociation.destroy(); 
 
        return res.sendStatus(204); 
+    }, 
+    async deleteTeam(req, res, next) {
+        const {id} = req.params;
+
+        const team = await Team.findByPk(id); 
+
+        if(!team) {
+            return next();
+        }
+
+        await team.destroy();
+
+        return res.sendStatus(204);
     }
 }
 

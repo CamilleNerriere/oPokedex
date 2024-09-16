@@ -13,6 +13,7 @@ CREATE TABLE "pokemon" (
   "atk_spe" INT NOT NULL,
   "def_spe" INT NOT NULL,
   "speed" INT NOT NULL, 
+  "vote" INT DEFAULT 0,
   "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "updated_at" TIMESTAMPTZ
 );

@@ -16,4 +16,6 @@ teamRouter.post('/:pokemon_id(\\d+)/:team_id(\\d+)', catchErrors(teamController.
 
 teamRouter.delete('/:pokemon_id(\\d+)/:team_id(\\d+)', catchErrors(teamController.deletePokemon));
 
+teamRouter.delete('/:id(\\d+)', catchErrors(teamController.deleteTeam));
+
 export {teamRouter}

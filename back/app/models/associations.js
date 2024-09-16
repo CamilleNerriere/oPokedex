@@ -31,6 +31,7 @@ Team.belongsToMany(Pokemon, {
     through: TeamPokemon, 
     foreignKey: 'team_id', 
     otherKey: 'pokemon_id',
+    onDelete: 'CASCADE',
 }); 
 
 export {Pokemon, Team, Type, PokemonType, TeamPokemon, sequelize};

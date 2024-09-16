@@ -39,6 +39,9 @@ Pokemon.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         }, 
+        vote: {
+            type: DataTypes.INTEGER,
+        },
         created_at: {
             type: DataTypes.DATE,
             allowNull: false,
