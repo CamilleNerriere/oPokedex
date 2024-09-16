@@ -1,4 +1,4 @@
-import {Model, DataTypes} from 'sequelize';
+import {Model, DataTypes, literal} from 'sequelize';
 import {sequelize} from '../database/connection.js' 
 
 class Pokemon extends Model {}
@@ -47,7 +47,7 @@ Pokemon.init(
         updated_at: DataTypes.DATE,
     }, 
     {
-        sequelize: sequelize(),
+        sequelize: sequelize,
         tableName: 'pokemon',
     }
 );

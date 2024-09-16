@@ -1,4 +1,4 @@
-import {Model, DataTypes} from 'sequelize';
+import {Model, DataTypes, literal} from 'sequelize';
 import {sequelize} from '../database/connection.js' 
 
 class Type extends Model {}
@@ -27,7 +27,7 @@ Type.init(
         updated_at: DataTypes.DATE,
     }, 
     {
-        sequelize: sequelize(),
+        sequelize: sequelize,
         tableName: 'type',
     }
 );
