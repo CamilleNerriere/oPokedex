@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite"
   },
   "author": "",
   "license": "ISC",
@@ -13,8 +14,8 @@
     "eslint": "^9.10.0",
     "globals": "^15.9.0",
     "prettier": "^3.3.3",
-    "vite": "^5.4.5"
-  }, 
+    "vite": "^5.4.6"
+  },
   "prettier": {
     "printWidth": 80,
     "tabWidth": 4,

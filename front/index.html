@@ -17,17 +17,135 @@
 
     <!-- Custom CSS-->
     <!-- <link rel="stylesheet" href="./assets/css/style.css"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+
 
     <!-- Custom JS -->
-    <!-- <script type="module" src="./assets/js/index.js"></script> defer est sous entendu avec un type=module -->
+    <script type="module" src="./assets/js/app.js"></script> 
 </head>
 
 <body>
-    <header>
-        <h1>Pokedex</h1>
-    </header>
-    
+    <div class="container">
+        
+        <header>
+            <div class="container pt-2">
+                <div class="row">
+                    <div class="col-md-6 d-flex justify-content-center justify-content-md-start"><h1>Pokedex</h1></div>
+                    <div class="col-md-6 d-flex justify-content-center justify-content-md-end">
+                        <select class="form-control mt-2 w-50 w-md-100">
+                            <option>Bulbizarre</option>
+                            <option>Herbizarre</option>
+                            <option>Rondoudou</option>
+                            <option>Pikachu</option>
+                          </select>
+                    </div>
+                </div>
+                <nav class="container py-2">
+                    <ul class="row nav__list pl-0 d-flex justify-content-center">
+                        <li class="col-md-2 d-flex justify-content-center">
+                            <a href="#">Types</a>
+                        </li>
+                        <li class="col-md-2 d-flex justify-content-center">
+                            <a href="#">Teams</a>
+                        </li>
+                        <li class="col-md-2 d-flex justify-content-center">
+                            <a href="#">Podium</a>
+                        </li>
+                        <li class="col-md-2 d-flex justify-content-center">
+                            <a href="#">Login</a>
+                        </li>
+                        <li class="col-md-2 d-flex justify-content-center">
+                            <a href="#">Sign up</a>
+                        </li>
+                    </ul>
+                </nav>
+                
+            </div>
+        
+            
+        </header>
 
+        <main>
+            <div class="container py-5 list__teams .hidden justify-content-center">
+                <div class ="row d-flex justify-content-center">
+                    <div class="col-auto team__item">
+                        <a href="#">Team Rocket</a>
+                    </div>
+                    <div class="col-auto team__item">
+                        <a href="#">Team Rocket</a>
+                    </div>
+                    <div class="col-auto team__item">
+                        <a href="#">Team Rocket</a>
+                    </div>
+                    <div class="col-auto team__item">
+                        <a href="#">Team Rocket</a>
+                    </div>
+                    <div class="col-auto team__item">
+                        <a href="#">Team Rocket</a>
+                    </div>
+                    <div class="col-auto team__item">
+                        <a href="#">Team Rocket</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container py-5 list__pokemons">
+                <div class ="row">
+                    <div class="col-md-3 team__item py-3">
+                        <img src="./assets/img/1.webp" class="img-fluid" alt="Bulbizarre">
+                        <div class="position-absolute w-auto h-auto d-flex justify-content-center align-items-center" style="top: 0; right: 0;">
+                            <a href="#" class="text-dark text-decoration-none m-0">&#10084;&#65039; 0</a>
+                        </div>
+                        <div class="overlay position-absolute w-100 h-25 d-flex justify-content-center align-items-center" style="bottom: 0; left: 0; background-color: rgba(0,0,0,0.5);">
+                            <a href="#"><h5 class="text-white m-0" id="bulbizarreName">Bulbizarre</h5></a>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </main>
+
+        <!-- La Modale -->
+    <div class="modal" id="pokemonDetailModal" tabindex="-1" role="dialog" aria-labelledby="pokemonDetailModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header d-flex align-items-center">
+                    <h3 class="modal-title" id="exampleModalLabel"><span class="pokemonDetailName">Bulbizarre</span></h5>
+                    <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6>Type(s)</h6>
+                    <div class="container d-flex justify-content-center" id="type">Type(s)</div>
+                    <h6>Statistiques</h6>
+                    <ul class="details__statistics">
+                        <li id="pv">PV : <span>value</span></li>
+                        <li id="atk">Attaque : <span>value</span></li>
+                        <li id="def">Défense : <span>value</span></li>
+                        <li id="atk-spe">Attaque Spé.: <span>value</span></li>
+                        <li id="def_spe">Défence Spé. : <span>value</span></li>
+                        <li id="speed">Vitesse : <span>value</span></li>
+                        <li id="vote">Votes : <span>value</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="h5 text-dark text-decoration-none">Voter pour lui !  &#10084;&#65039; </a>
+                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary">Sauvegarder les changements</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </div>  
 </body>
 
 </html>
