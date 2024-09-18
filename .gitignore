@@ -128,3 +128,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# test CSS Bootstrap 
+./assets/js/bootstrap-examples.js

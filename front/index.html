@@ -68,8 +68,8 @@
 
             
 
-            <div class="container py-5 list__pokemons">
-                <div class ="row">
+            <div class="container py-5 ">
+                <div class ="row list-pokemons">
 
                     <!-- AFFICHER LES POKEMONS ICI -->
                 
@@ -113,67 +113,68 @@
                 </div>
             </template>
 
-           
-            <!-- on peut réutiliser ce container pour afficher dans la modale d'équipe les pokemons qu'ont cette équipe  -->
+        <!-- Template card pokemon -->
 
-        <template id="pokemonCard">
-            <div class="col-md-3 team__item py-3 position-relative">
+        <template id="pokemonTemplate">
+            <div class="col-md-3 team__item py-3 position-relative" data-pokemon-id="A">
                 <img src="./assets/img/1.webp" class="img-fluid" alt="Bulbizarre">
                 <div class="position-absolute w-auto h-auto d-flex justify-content-center align-items-center" style="top: 0; right: 0;">
-                    <a href="#" class="text-dark text-decoration-none m-0">&#10084;&#65039; 0</a>
+                    <a href="#" class="text-dark text-decoration-none m-0 pokemon-vote">&#10084;&#65039; <span class="nb">0</span></a>
                 </div>
                 <div class="overlay position-absolute w-100 h-25 d-flex justify-content-center align-items-center" style="bottom: 0; left: 0; background-color: rgba(0,0,0,0.5);">
-                    <a href="#"><h5 class="text-white m-0" id="bulbizarreName">Bulbizarre</h5></a>
+                    <a href="#" class="text-white text-decoration-none m-0 pokemon-link" id="pokemonName"><h5 class="text-white m-0">Bulbizarre</h5></a>
                 </div>
             </div>
         </template>
 
-        <!-- La Modale détail pokemon-->
-        <div class="modal" id="pokemonDetailModal" tabindex="-1" role="dialog" aria-labelledby="pokemonDetailModal" aria-hidden="true">
-            <div class="modal-dialog" role="dialog">
-                <div class="modal-content">
-                    <div class="modal-header d-flex align-items-center">
-                        <h3 class="modal-title" id="pokemonModalLabel"><span class="pokemonDetailName">Bulbizarre</span></h3>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <h6>Type(s)</h6>
-                        <div class="container d-flex justify-content-center" id="type">
-                            <button type="button" class="btn btn-primary typeBtn">Type(s)</button>
+        <!-- Template détail pokemon-->
+         <template id="pokemonDetailsTemplate">
+            <div class="modal" id="pokemonDetailModal" tabindex="-1" role="dialog" aria-labelledby="pokemonDetailModal" aria-hidden="true">
+                <div class="modal-dialog" role="dialog">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex align-items-center">
+                            <h3 class="modal-title" id="pokemonModalLabel"><span class="pokemonDetailName">Bulbizarre</span></h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <h6>Statistiques</h6>
-                        <ul class="details__statistics">
-                            <li id="pv">PV : <span>value</span></li>
-                            <li id="atk">Attaque : <span>value</span></li>
-                            <li id="def">Défense : <span>value</span></li>
-                            <li id="atk-spe">Attaque Spé.: <span>value</span></li>
-                            <li id="def_spe">Défense Spé. : <span>value</span></li>
-                            <li id="speed">Vitesse : <span>value</span></li>
-                            <li id="vote">Votes : <span>value</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="modal-footer container position-relative">
+                        <div class="modal-body">
+                            <h6>Type(s)</h6>
+                            <div class="container d-flex justify-content-center" id="type">
+                                <!-- INSERER LES TYPES ICI  -->
+                            </div>
+                            <h6>Statistiques</h6>
+                            <ul class="details__statistics">
+                                <li>Attaque : <span id="atk">value</span></li>
+                                <li>Défense : <span id="def">value</span></li>
+                                <li>Attaque Spé.: <span id="atk_spe">value</span></li>
+                                <li>Défense Spé. : <span id="def_spe">value</span></li>
+                                <li>Vitesse : <span id="speed">value</span></li>
+                                <li>Votes : <span id="vote">value</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer container position-relative">
 
 
-                            <form class="form-inline mx-auto mb-3 text-center">
-                                <label class="my-1 mr-2 visually-hidden" for="inlineFormCustomSelectPref">Ajouter à l'équipe</label>
-                                <select class="form-select my-2 mr-sm-2" id="inlineFormCustomSelectPref">
-                                <option selected>Ajouter à l'équipe</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                                </select>
-                            
-                                <button type="submit" class="btn btn-primary my-1 d-block mx-auto">Enregistrer</button>
-                            </form>
+                                <form class="form-inline mx-auto mb-3 text-center">
+                                    <label class="my-1 mr-2 visually-hidden" for="inlineFormCustomSelectPref">Ajouter à l'équipe</label>
+                                    <select class="form-select my-2 mr-sm-2" id="inlineFormCustomSelectPref">
+                                    <option selected>Ajouter à l'équipe</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                    </select>
+                                
+                                    <button type="submit" class="btn btn-primary my-1 d-block mx-auto">Enregistrer</button>
+                                </form>
 
-                            <a href="#" class="position-absolute bottom-0 end-0 h6 text-dark text-decoration-none pb-2 pe-2">Voter pour lui !  &#10084;&#65039; </a>
+                                <a href="#" class="position-absolute bottom-0 end-0 h6 text-dark text-decoration-none pb-2 pe-2">Voter pour lui !  &#10084;&#65039; </a>
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </template>
+
 
         <!-- Modale détails équipe -->
 
