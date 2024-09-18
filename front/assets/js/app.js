@@ -1,10 +1,11 @@
 import {pokemonsModule} from "./pokemons/pokemons.module.js"; 
+import {typesModule} from "./types/types.modules.js";
 
 const app = {
     async init(e){
         try {
-            console.log('Init fonction');
             pokemonsModule.init(); 
+            typesModule.init();
         } catch (error) {
             console.log(error);
         }

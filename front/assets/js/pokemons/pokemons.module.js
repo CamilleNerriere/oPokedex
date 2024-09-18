@@ -1,18 +1,23 @@
 import {pokemonsApi} from "./pokemons.api.js"; 
+import {colorGestion} from "../utils/colorGestion.js"
 
 const pokemonsModule = {
 
     async init(){
         
         // Afficher tous les pokemons 
-        pokemonsModule.fetchAndDisplayPokemons(); 
-    }, 
-
-    async fetchAndDisplayPokemons(){
         try {
             const allPokemons = await pokemonsApi.getPokemons(); 
-            
-            for (const pokemon of allPokemons) {
+            pokemonsModule.DisplayPokemons(allPokemons); 
+        } catch (error) {
+            console.log(error);
+        }
+        
+    }, 
+
+    async DisplayPokemons(pokemons){
+        try {
+            for (const pokemon of pokemons) {
                 pokemonsModule.addPokemonToDOM(pokemon);
             }
         } catch(error) {
@@ -27,7 +32,20 @@ const pokemonsModule = {
         img.src = `./assets/img/${pokemon.id}.webp`;
         img.alt = pokemon.name;
 
-        clone.querySelector("[data-pokemon-id]").textcontent = pokemon.id;
+        //gestion des dataset (id et type)
+        const pokemonElement = clone.querySelector('.team__item');
+
+        pokemonElement.dataset.pokemonId = pokemon.id;
+        
+        const typesData = [];
+        const pokemonTypes = pokemon.types;
+
+        if(pokemonTypes){
+            for (const type of pokemonTypes){
+            typesData.push(type.name);
+            }
+            pokemonElement.dataset.pokemonType = JSON.stringify(typesData); 
+        }
 
         const link = clone.getElementById("pokemonName");
         link.href = `http://localhost:3000/pokemons/${pokemon.id}`;
@@ -68,6 +86,8 @@ const pokemonsModule = {
         const clone = pokemonTemplate.content.cloneNode(true); 
 
         clone.querySelector('.modal-title').textContent = pokemon.name;
+
+        clone.querySelector('.img-fluid').src = `./assets/img/${pokemon.id}.webp`;
         
         // // affichage des statistiques -> voir si possible forin
 
@@ -95,7 +115,7 @@ const pokemonsModule = {
             btn.style.border = `#${type.color}`;
 
             // On ajuste la couleur du texte pour la visibilité
-            btn.style.color = this.getContrastColor(type.color);
+            btn.style.color = colorGestion.hexColor(type.color);
 
             //insertion des boutons
             const parent = clone.getElementById('type');
@@ -106,19 +126,6 @@ const pokemonsModule = {
         parent.appendChild(clone);
 
     }, 
-    getContrastColor(hexColor) {
-        // Convertir la couleur hex en RGB
-        const r = parseInt(hexColor.slice(1, 3), 16);
-        const g = parseInt(hexColor.slice(3, 5), 16);
-        const b = parseInt(hexColor.slice(5, 7), 16);
-    
-        // Calculer la luminosité
-        const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-    
-        // Retourner noir ou blanc selon la luminosité
-        return luminance > 0.5 ? '#000000' : '#FFFFFF';
-    }
-
 }; 
 
 export {pokemonsModule}

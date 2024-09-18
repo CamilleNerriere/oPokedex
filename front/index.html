@@ -42,7 +42,7 @@
                 <nav class="container py-2">
                     <ul class="row nav__list pl-0 d-flex justify-content-center">
                         <li class="col-md-2 d-flex justify-content-center">
-                            <a href="#" class="text-dark text-decoration-none">Types</a>
+                            <a href="#" class="text-dark text-decoration-none" id="typesLink">Types</a>
                         </li>
                         <li class="col-md-2 d-flex justify-content-center">
                             <a href="# " class="text-dark text-decoration-none">Teams</a>
@@ -67,6 +67,12 @@
         <main>
 
             
+             <div class ="row d-flex py- 5 list__items">
+                <!-- AFFICHER TYPES / TEAMS -->
+            </div>
+                
+
+
 
             <div class="container py-5 ">
                 <div class ="row list-pokemons">
@@ -82,41 +88,25 @@
 
             <!-- Template Types ou Teams // Pour Type, on cache le dernier item -->
             <template id="itemsListTemplate">
-                <div class="container py-5 list__items hidden justify-content-center">
-                    <div class ="row d-flex justify-content-center">
-                        <div class="col-auto list__item">  
-                                <a href="#" class="itemDetailsLink text-white text-decoration-none">
-                                    <button type="button" class="btn btn-primary typeBtn">Team Rocket</button>
-                                </a>       
-                        </div>
-                        <div class="col-auto list__item">
-                            <a href="#">Team Rocket</a>
-                        </div>
-                        <div class="col-auto list__item">
-                            <a href="#">Team Rocket</a>
-                        </div>
-                        <div class="col-auto list__item">
-                            <a href="#">Team Rocket</a>
-                        </div>
-                        <div class="col-auto list__item">
-                            <a href="#">Team Rocket</a>
-                        </div>
-                        <div class="col-auto team__item">
-                            <a href="#">Team Rocket</a>
-                        </div>
-                        <div class="col-auto list__item">
-                            <a href="#" class="text-white text-decoration-none">
-                                <button type="button" class="btn btn-primary typeBtn addTeamBtn"><i class="fa-solid fa-plus"></i> Ajouter une équipe</button>    
-                            </a>
-                        </div>
-                    </div>
+                
+                <div class="col-2 list__item mb-3">  
+                        <a href="#" class="itemDetailsLink text-white text-decoration-none">
+                            <button type="button" class="btn btn-primary typeBtn">Team Rocket</button>
+                        </a>       
                 </div>
+                        
+                <div class="col-auto list__item hidden">
+                    <a href="#" class="text-white text-decoration-none">
+                        <button type="button" class="btn btn-primary typeBtn addTeamBtn"><i class="fa-solid fa-plus"></i> Ajouter une équipe</button>    
+                    </a>
+                </div>
+               
             </template>
 
         <!-- Template card pokemon -->
 
         <template id="pokemonTemplate">
-            <div class="col-md-3 team__item py-3 position-relative" data-pokemon-id="A">
+            <div class="col-md-3 team__item py-3 position-relative" data-pokemon-id="" data-pokemon-type ="">
                 <img src="./assets/img/1.webp" class="img-fluid" alt="Bulbizarre">
                 <div class="position-absolute w-auto h-auto d-flex justify-content-center align-items-center" style="top: 0; right: 0;">
                     <a href="#" class="text-dark text-decoration-none m-0 pokemon-vote">&#10084;&#65039; <span class="nb">0</span></a>
@@ -137,6 +127,8 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
+                            <div>
+                            <img src="..." class="img-fluid mx-auto d-block mb-2" alt="">
                             <h6>Type(s)</h6>
                             <div class="container d-flex justify-content-center" id="type">
                                 <!-- INSERER LES TYPES ICI  -->
@@ -151,6 +143,7 @@
                                 <li>Votes : <span id="vote">value</span>
                                 </li>
                             </ul>
+                            </div>
                         </div>
                         <div class="modal-footer container position-relative">
 

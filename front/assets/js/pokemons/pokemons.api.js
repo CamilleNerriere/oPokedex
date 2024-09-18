@@ -19,7 +19,7 @@ const pokemonsApi = {
         } else {
             throw data;
         }
-    }
+    }, 
 }
 
 export {pokemonsApi};
