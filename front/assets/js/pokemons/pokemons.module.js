@@ -73,9 +73,10 @@ const pokemonsModule = {
 
         try {
             const pokemon = await pokemonsApi.getOnePokemon(id);
+            pokemonsModule.clearPokemonDetailsModale();
+            
             pokemonsModule.addPokemonModaleToDOM(pokemon);
-            const pokemonModal = new bootstrap.Modal(document.getElementById('pokemonDetailModal'));
-            pokemonModal.show();
+            pokemonsModule.showDetailsModal();
         } catch (error) {
             console.log(error);
         }
@@ -122,10 +123,26 @@ const pokemonsModule = {
             parent.appendChild(btn);
         }
 
+
         const parent = document.querySelector('.container');
         parent.appendChild(clone);
 
+
+
     }, 
+    clearPokemonDetailsModale() {
+        const modalBody = document.getElementById('pokemonDetailModal');
+
+        if(modalBody){
+            modalBody.remove();
+        }
+        
+    },
+    showDetailsModal(){
+        const modal = document.getElementById('pokemonDetailModal');
+        const pokemonModal = new bootstrap.Modal(modal);
+        pokemonModal.show();
+    },
 }; 
 
 export {pokemonsModule}
