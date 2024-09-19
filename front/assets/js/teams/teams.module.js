@@ -105,11 +105,14 @@ const teamsModule = {
         const teamTemplate = document.getElementById("teamDetailTemplate"); 
         const clone = teamTemplate.content.cloneNode(true); 
 
+        clone.querySelector("[data-team-id]").dataset.teamId= team.id;
+
         clone.querySelector('.teamDetailName').textContent = team.name;
 
         if(team.description){
             clone.getElementById('teamDescription').textContent = team.description;
         }
+
         
         //insertion des pokemons de l'équipe
         const teamPokemons = team.pokemons; 
@@ -130,7 +133,7 @@ const teamsModule = {
         console.log(team.id);
         form.querySelector('input[name="team_id"]').value = team.id;
 
-        // tenter de mettre l'event listener ici 
+        // listener submitform
         form.classList.add('hidden');
 
         form.addEventListener('submit', (event) => {
@@ -144,6 +147,14 @@ const teamsModule = {
                 form.classList.toggle('hidden');
             })
         }
+
+        // listener delete team 
+
+        const deleteBtn = document.querySelector('.teamDelete');
+        
+        deleteBtn.addEventListener('click', (event) => {
+            teamsModule.removeTeam(event);
+        })
     }, 
     createPokemonCard(pokemon, teamID){
         const pokemonTemplate = document.getElementById("pokemonTemplate"); 
@@ -252,6 +263,20 @@ const teamsModule = {
             console.log(error);
         }
         
+    },
+    removeTeam(event){
+        event.preventDefault();
+        const teamCard = event.target.closest('#teamDetailModal');
+        const teamId = teamCard.dataset.teamId;
+        try {
+            teamsApi.removeOneTeam(teamId);
+            const modal = bootstrap.Modal.getInstance(document.querySelector('#teamDetailModal'));
+
+            //gérer suppression du DOM
+            modal.hide();
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 

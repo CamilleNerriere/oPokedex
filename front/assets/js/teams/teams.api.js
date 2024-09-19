@@ -77,6 +77,17 @@ const teamsApi = {
             throw response; 
         }
     },
+    async removeOneTeam(teamId){
+        const httpResponse = await fetch(`${teamsApi.baseUrl}/${teamId}`, {
+            method: "DELETE",
+        });
+        if (httpResponse.ok) {
+            return true;
+        } else {
+            const response = await httpResponse.json();
+            throw response; 
+        }
+    }
 }
 
 export {teamsApi};
