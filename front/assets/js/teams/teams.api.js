@@ -10,7 +10,7 @@ const teamsApi = {
             throw data; 
         }
     }, 
-    async getTeam(id){
+    async getOneTeam(id){
         const httpResponse = await fetch(teamsApi.baseUrl + '/' + id);
         const data = await httpResponse.json();
 

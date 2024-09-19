@@ -5,17 +5,17 @@ import {colorGestion} from "../utils/colorGestion.js"
 const typesModule = {
     async init(){
         // event listener afficher les types :
-        const typeBtn = document.getElementById('typesLink');
+        const typeLink = document.getElementById('typesLink');
 
         // je vais appeler showOrHideTypes(event)
         
-        typeBtn.addEventListener('click', (event) => {typesModule.showOrHideTypes(event)});
+        typeLink.addEventListener('click', (event) => {typesModule.showOrHideTypes(event)});
     }, 
     async showOrHideTypes(event){
 
         event.preventDefault();
 
-        const parent = document.querySelector('.list__items');
+        const parent = document.querySelector('.types__items');
 
         if (parent.classList.contains('active-types')){
             typesModule.removeTypesOfDOM();
@@ -50,12 +50,12 @@ const typesModule = {
             typesModule.showType(type.id)}
         );
         
-        const parent = document.querySelector('.list__items');
+        const parent = document.querySelector('.types__items');
         parent.classList.add('active-types');
         parent.appendChild(clone);
     },
     removeTypesOfDOM(){
-        const parent = document.querySelector('.list__items');
+        const parent = document.querySelector('.types__items');
         parent.classList.remove('active-types');
         parent.innerHTML ='';
     }, 

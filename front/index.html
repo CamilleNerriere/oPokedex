@@ -45,7 +45,7 @@
                             <a href="#" class="text-dark text-decoration-none" id="typesLink">Types</a>
                         </li>
                         <li class="col-md-2 d-flex justify-content-center">
-                            <a href="# " class="text-dark text-decoration-none">Teams</a>
+                            <a href="# " class="text-dark text-decoration-none" id="teamsLink">Teams</a>
                         </li>
                         <li class="col-md-2 d-flex justify-content-center">
                             <a href="#" class="text-dark text-decoration-none">Podium</a>
@@ -66,11 +66,19 @@
 
         <main>
 
-            
-             <div class ="row d-flex py- 5 list__items">
-                <!-- AFFICHER TYPES / TEAMS -->
+            <div class="border-top mt-2">
+                <div class ="row d-flex py- 5 mt-4 types__items">
+                    <!-- AFFICHER TYPES  -->
+                </div>
             </div>
-                
+            
+            <div class="border-top mt-2">
+                <div class ="row py-1 mt-3 d-flex justify-content-center team__items"></div>
+                    <!-- AFFICHER TEAMS -->
+                </div>
+            </div>
+            
+
 
 
 
@@ -169,40 +177,47 @@
         </template>
 
 
-        <!-- Modale détails équipe -->
+        <!-- template modale détails équipe -->
 
-        <div class="modal" id="teamDetailModal" tabindex="-1" role="dialog" aria-labelledby="teamDetailModal" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="teamModalLabel"><span class="teamDetailName">Team Rocket</span> 
-                            <a href="#" class="teamEdit small text-dark text-decoration-none ms-1"><i class="fa-solid fa-pen pl-2"></i></a>
-                            <a href="#" class="teamDelete small text-dark text-decoration-none ms-1"><i class="fa-solid fa-trash pl-2"></i></a>
-                        </h3>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <h6 class="py-2" id="teamDescription">De retour pour vous jouer un mauvais tour <a href="#" class="teamEdit small text-dark text-decoration-none"><i class="fa-solid fa-pen"></i></a></h6>
-                        <!-- le teamEdit vient montrer un formulaire d'édition qu'on va venir dans css pur remove class .hidden et on ajoute hidden à la description -->
-                        <form class="text-center hidden">
-                            <div class="form-group">
-                            <label class="visually-hidden" for="name">Nom</label>
-                            <input type="text" class="form-control" id="nameInput" placeholder="Nom">
-                            </div>
-                            <div class="form-group">
-                            <label class="visually-hidden" for="description">Description</label>
-                            <input type="text" class="form-control mt--2" id="descriptionInput" placeholder="Description">
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-2">Enregistrer</button>
-                        </form>
-                        <h5 class="py-3">Pokemons de l'équipe:</h5>
-                            <div class="container py-3 list__pokemons">
-                                <!-- INSERER LES POKEMONS DE L'EQUIPE -->
-                            </div>
+        <template id ="teamDetailTemplate">
+            <div class="modal" id="teamDetailModal" tabindex="-1" role="dialog" aria-labelledby="teamDetailModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="teamModalLabel"><span class="teamDetailName">Team Rocket</span> 
+                                <a href="#" class="teamEdit small text-dark text-decoration-none ms-1"><i class="fa-solid fa-pen pl-2"></i></a>
+                                <a href="#" class="teamDelete small text-dark text-decoration-none ms-1"><i class="fa-solid fa-trash pl-2"></i></a>
+                            </h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h6 class="py-2"> <span id="teamDescription">De retour pour vous jouer un mauvais tour</span>
+                             <a href="#" class="teamEdit small text-dark text-decoration-none"><i class="fa-solid fa-pen"></i></a></h6>
+                            <!-- le teamEdit vient montrer un formulaire d'édition qu'on va venir dans css pur remove class .hidden et on ajoute hidden à la description -->
+                            <form class="text-center edit__form">
+                                <div class="form-group">
+                                <label class="visually-hidden" for="name">Nom</label>
+                                <input type="text" class="form-control" id="nameInput" placeholder="Nom">
+                                </div>
+                                <div class="form-group">
+                                <label class="visually-hidden" for="description">Description</label>
+                                <input type="text" class="form-control mt--2" id="descriptionInput" placeholder="Description">
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-2">Enregistrer</button>
+                            </form>
+                            <h5 class="py-3">Pokemons de l'équipe:</h5>
+                                <div class="container py-3">
+                                    <div class ="row list__pokemons">
+
+                                        <!-- AFFICHER LES POKEMONS ICI -->
+                                    
+                                    </div>
+                                </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </template>
 
         <!-- modale add team -->
 
