@@ -34,6 +34,23 @@ const teamsApi = {
         } else {
             throw newTeam;
         }
+    }, 
+    async updateTeam(data){
+        const dataToJSON = JSON.stringify(data);
+        console.log('on passe dans l\'api')
+        const httpResponse = await fetch(`${teamsApi.baseUrl}/${data.team_id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: dataToJSON,
+        });
+        const newTeam = await httpResponse.json();
+        if (httpResponse.ok) {
+            return newTeam;
+        } else {
+            throw newTeam;
+        }
     }
 }
 

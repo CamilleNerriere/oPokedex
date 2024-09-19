@@ -7,23 +7,6 @@ const teamsModule = {
         // event listener pour afficher les teams 
         const teamLink = document.getElementById('teamsLink'); 
         teamLink.addEventListener('click',(event) => {teamsModule.showOrHideTeams(event)});
-
-        //event listener submit formulaire ajout équipe -> delegation car modale n'existe pas au chargement du DOM
-
-        // const container = document.querySelector('.container');
-
-        // container.addEventListener('submit', async (event) => {
-        //     if (event.target.matches('#addTeamForm')) {
-        //         event.preventDefault(); 
-
-        //         try {
-        //             await teamsModule.handleSubmitOnAddTeamForm(event);
-        //             const modal = bootstrap.Modal.getInstance(document.querySelector('#addTeamModal'));
-        //             modal.hide();
-        //         } catch(error) {
-        //             console.error("Erreur soumission formulaire");
-        //         }         
-        //     }
         // })
 
     }, 
@@ -88,7 +71,7 @@ const teamsModule = {
             teamModal.show();
             
             const form = document.querySelector('#addTeamForm');
-            form.addEventListener('submit', (event) => {teamsModule.firstHandSubmit(event)} )
+            form.addEventListener('submit', (event) => {teamsModule.handleSubmitOnAddTeamForm(event)} )
         })
    
         const parent = document.querySelector('.team__items');
@@ -143,7 +126,15 @@ const teamsModule = {
         //listener sur edit btn pour afficher le formulaire
 
         const form = document.querySelector('.edit__form');
+        console.log(team.id);
+        form.querySelector('input[name="team_id"]').value = team.id;
+
+        // tenter de mettre l'event listener ici 
         form.classList.add('hidden');
+
+        form.addEventListener('submit', (event) => {
+            teamsModule.handleSubmitOnEditTeamForm(event);
+        })
 
         const editBtns = document.querySelectorAll('.teamEdit');
         
@@ -203,28 +194,38 @@ const teamsModule = {
         pokemonModal.show();
     },
     async handleSubmitOnAddTeamForm(event){
+        event.preventDefault();
         const form = event.target;
         const formData = new FormData(form); 
         const data = JSON.stringify(Object.fromEntries(formData));
         try {
             const newTeam = await teamsApi.createTeam(data);
             console.log(newTeam);
+            const modal = bootstrap.Modal.getInstance(document.querySelector('#addTeamModal'));
+            modal.hide();
         } catch (error) {
             console.log(error); 
         }
     }, 
-    async firstHandSubmit(event) {
-        event.preventDefault(); 
-
+    async handleSubmitOnEditTeamForm(event){
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form); 
+        const data = Object.fromEntries(formData);
+        console.log(data);
         try {
-            await teamsModule.handleSubmitOnAddTeamForm(event);
-            const modal = bootstrap.Modal.getInstance(document.querySelector('#addTeamModal'));
-            modal.hide();
-        } catch(error) {
-            console.error(error);
-        }      
-    }
+            if(data.name || data.description){
+                console.log('on est passé par ici')
+                const updatedteam = await teamsApi.updateTeam(data);
+                console.log(updatedteam);
+                const modal = bootstrap.Modal.getInstance(document.querySelector('#teamDetailModal'));
+                modal.hide();
+            }
+        } catch (error) {
+            console.log(error);
+        }
 
+    }
 }
 
 export {teamsModule}

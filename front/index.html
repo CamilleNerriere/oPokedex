@@ -189,13 +189,14 @@
                              <a href="#" class="teamEdit small text-dark text-decoration-none"><i class="fa-solid fa-pen"></i></a></h6>
                             <!-- le teamEdit vient montrer un formulaire d'édition qu'on va venir dans css pur remove class .hidden et on ajoute hidden à la description -->
                             <form class="text-center edit__form">
+                                <input class="team_id visually-hidden" name="team_id" value="" />
                                 <div class="form-group">
                                 <label class="visually-hidden" for="name">Nom</label>
-                                <input type="text" class="form-control" id="nameInput" placeholder="Nom">
+                                <input type="text" class="form-control" name="name" placeholder="Nom">
                                 </div>
                                 <div class="form-group">
                                 <label class="visually-hidden" for="description">Description</label>
-                                <input type="text" class="form-control mt--2" id="descriptionInput" placeholder="Description">
+                                <input type="text" class="form-control mt--2" name="description" placeholder="Description">
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-2">Enregistrer</button>
                             </form>
