@@ -223,17 +223,17 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form action="/">
+                <form id="addTeamForm" method="POST" action="/">
                 <div class="modal-body">
 
                     <div class="form-group">
                         <label class="visually-hidden" for="name">Nom</label>
-                        <input type="text" class="form-control" id="addNameInput" placeholder="Nom">
+                        <input type="text" class="form-control" name="name" placeholder="Nom">
                     </div>
 
                     <div class="form-group">
                         <label class="visually-hidden" for="description">Description</label>
-                        <input type="text" class="form-control mt--2" id="addDescriptionInput" placeholder="Description">
+                        <input type="text" class="form-control mt--2" name="description" placeholder="Description">
                     </div>
 
                 </div>

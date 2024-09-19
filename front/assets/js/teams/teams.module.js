@@ -5,10 +5,26 @@ import {pokemonsModule} from "../pokemons/pokemons.module.js";
 const teamsModule = {
     init(){
         // event listener pour afficher les teams 
-
         const teamLink = document.getElementById('teamsLink'); 
+        teamLink.addEventListener('click',(event) => {teamsModule.showOrHideTeams(event)});
 
-        teamLink.addEventListener('click', (event) => {teamsModule.showOrHideTeams(event)});
+        //event listener submit formulaire ajout équipe -> delegation car modale n'existe pas au chargement du DOM
+
+        // const container = document.querySelector('.container');
+
+        // container.addEventListener('submit', async (event) => {
+        //     if (event.target.matches('#addTeamForm')) {
+        //         event.preventDefault(); 
+
+        //         try {
+        //             await teamsModule.handleSubmitOnAddTeamForm(event);
+        //             const modal = bootstrap.Modal.getInstance(document.querySelector('#addTeamModal'));
+        //             modal.hide();
+        //         } catch(error) {
+        //             console.error("Erreur soumission formulaire");
+        //         }         
+        //     }
+        // })
 
     }, 
     async showOrHideTeams(event){
@@ -70,6 +86,9 @@ const teamsModule = {
             const modal = document.getElementById('addTeamModal');
             const teamModal = new bootstrap.Modal(modal);
             teamModal.show();
+            
+            const form = document.querySelector('#addTeamForm');
+            form.addEventListener('submit', (event) => {teamsModule.firstHandSubmit(event)} )
         })
    
         const parent = document.querySelector('.team__items');
@@ -133,7 +152,6 @@ const teamsModule = {
                 form.classList.toggle('hidden');
             })
         }
-
     }, 
     createPokemonCard(pokemon){
         const pokemonTemplate = document.getElementById("pokemonTemplate"); 
@@ -184,6 +202,28 @@ const teamsModule = {
         const pokemonModal = new bootstrap.Modal(modal);
         pokemonModal.show();
     },
+    async handleSubmitOnAddTeamForm(event){
+        const form = event.target;
+        const formData = new FormData(form); 
+        const data = JSON.stringify(Object.fromEntries(formData));
+        try {
+            const newTeam = await teamsApi.createTeam(data);
+            console.log(newTeam);
+        } catch (error) {
+            console.log(error); 
+        }
+    }, 
+    async firstHandSubmit(event) {
+        event.preventDefault(); 
+
+        try {
+            await teamsModule.handleSubmitOnAddTeamForm(event);
+            const modal = bootstrap.Modal.getInstance(document.querySelector('#addTeamModal'));
+            modal.hide();
+        } catch(error) {
+            console.error(error);
+        }      
+    }
 
 }
 
