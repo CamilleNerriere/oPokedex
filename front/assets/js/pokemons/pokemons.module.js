@@ -128,11 +128,14 @@ const pokemonsModule = {
 
         try {
             const teams = await teamsApi.getTeams();
-            console.log(teams)
             const form = clone.querySelector('.form-inline');
-            const select = form.querySelector('select[name="teamSelect"]'); 
-
-
+            form.addEventListener('submit', (event)=> {
+                pokemonsModule.addPokemonToTeam(event);
+            })
+            const pokemonId = form.querySelector('input[name="pokemon_id"]')
+            pokemonId.value = pokemon.id;
+            const select = form.querySelector('select[name="team_id"]'); 
+    
             for (const team of teams) {
                 const option = document.createElement('option'); 
                 option.value = team.id;
@@ -142,7 +145,7 @@ const pokemonsModule = {
         } catch (error) {
             console.log(error)
         }
-        
+
         const parent = document.querySelector('.container');
         parent.appendChild(clone);
 
@@ -162,6 +165,24 @@ const pokemonsModule = {
         const pokemonModal = new bootstrap.Modal(modal);
         pokemonModal.show();
     },
+    async addPokemonToTeam(event){
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form); 
+        const data = Object.fromEntries(formData);
+        console.log(data);
+        try {
+            if(data.pokemon_id && data.team_id){
+                console.log('on est passé par ici')
+                const addedPokemon = await teamsApi.addPokemonToTeam(data);
+                console.log(addedPokemon);
+                const modal = bootstrap.Modal.getInstance(document.querySelector('#pokemonDetailModal'));
+                modal.hide();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }; 
 
 export {pokemonsModule}

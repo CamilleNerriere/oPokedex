@@ -51,6 +51,20 @@ const teamsApi = {
         } else {
             throw newTeam;
         }
+    }, 
+    async addPokemonToTeam(data){
+        const httpResponse = await fetch(`${teamsApi.baseUrl}/${data.pokemon_id}/${data.team_id}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        const addedPokemon = await httpResponse.json();
+        if (httpResponse.ok) {
+            return addedPokemon;
+        } else {
+            throw addedPokemon;
+        }
     }
 }
 

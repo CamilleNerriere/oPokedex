@@ -151,8 +151,9 @@
 
 
                                 <form class="form-inline mx-auto mb-3 text-center">
+                                    <input class="pokemon_id visually-hidden" name="pokemon_id" value="">
                                     <label class="my-1 mr-2 visually-hidden" for="inlineFormCustomSelectPref">Ajouter à l'équipe</label>
-                                    <select class="form-select my-2 mr-sm-2 add-pokemon" name="teamSelect" id="inlineFormCustomSelectPref">
+                                    <select class="form-select my-2 mr-sm-2 add-pokemon" name="team_id" id="inlineFormCustomSelectPref">
                                     <option selected>Ajouter à l'équipe</option>
                                     </select>
                                 
@@ -186,7 +187,7 @@
                              <a href="#" class="teamEdit small text-dark text-decoration-none"><i class="fa-solid fa-pen"></i></a></h6>
                             <!-- le teamEdit vient montrer un formulaire d'édition qu'on va venir dans css pur remove class .hidden et on ajoute hidden à la description -->
                             <form class="text-center edit__form">
-                                <input class="team_id visually-hidden" name="team_id" value="" />
+                                <input class="team_id visually-hidden" name="team_id" value="" disabled>
                                 <div class="form-group">
                                 <label class="visually-hidden" for="name">Nom</label>
                                 <input type="text" class="form-control" name="name" placeholder="Nom">
