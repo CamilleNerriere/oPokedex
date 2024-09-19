@@ -1,5 +1,6 @@
 import {pokemonsApi} from "./pokemons.api.js"; 
-import {colorGestion} from "../utils/colorGestion.js"
+import {colorGestion} from "../utils/colorGestion.js";
+import {teamsApi} from "../teams/teams.api.js";
 
 const pokemonsModule = {
 
@@ -75,14 +76,14 @@ const pokemonsModule = {
             const pokemon = await pokemonsApi.getOnePokemon(id);
             pokemonsModule.clearPokemonDetailsModale();
             
-            pokemonsModule.addPokemonModaleToDOM(pokemon);
+            await pokemonsModule.addPokemonModaleToDOM(pokemon);
             pokemonsModule.showDetailsModal();
         } catch (error) {
             console.log(error);
         }
         
     }, 
-    addPokemonModaleToDOM(pokemon){
+    async addPokemonModaleToDOM(pokemon){
         const pokemonTemplate = document.getElementById("pokemonDetailsTemplate"); 
         const clone = pokemonTemplate.content.cloneNode(true); 
 
@@ -123,7 +124,25 @@ const pokemonsModule = {
             parent.appendChild(btn);
         }
 
+        // création du formulaire pour ajouter aux équipes 
 
+        try {
+            const teams = await teamsApi.getTeams();
+            console.log(teams)
+            const form = clone.querySelector('.form-inline');
+            const select = form.querySelector('select[name="teamSelect"]'); 
+
+
+            for (const team of teams) {
+                const option = document.createElement('option'); 
+                option.value = team.id;
+                option.textContent = team.name;
+                select.appendChild(option);
+            }
+        } catch (error) {
+            console.log(error)
+        }
+        
         const parent = document.querySelector('.container');
         parent.appendChild(clone);
 
