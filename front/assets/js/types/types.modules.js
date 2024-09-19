@@ -44,6 +44,7 @@ const typesModule = {
         typeBtn.textContent = type.name;
         typeBtn.closest('a').href = `${typesApi.baseUrl}${type.id}`
 
+        
         // Listener pour afficher par type
         typeBtn.addEventListener('click', (event) => {
             event.preventDefault();

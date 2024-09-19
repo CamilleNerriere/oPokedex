@@ -23,7 +23,11 @@ const teamsModule = {
         
                 for (const team of teams) {
                     teamsModule.addTeamsToDOM(team); 
+                    
                 }
+                teamsModule.addAddBtnToDOM();
+
+    
             } catch (error) {
             console.log(error)
             } 
@@ -36,17 +40,38 @@ const teamsModule = {
         const teamBtn = clone.querySelector('.typeBtn');
         teamBtn.style.backgroundColor = `#d51515`;
         teamBtn.style.border = `#d51515`;
-         teamBtn.style.color = colorGestion.hexColor('d51515');
+        teamBtn.style.color = colorGestion.hexColor('d51515');
 
         teamBtn.textContent = team.name;
         teamBtn.closest('a').href = `${teamsApi.baseUrl}${team.id}`
 
-        // Listener pour afficher par type
+        // Listener pour afficher les teams
         teamBtn.addEventListener('click', (event) => {
             event.preventDefault();
             teamsModule.showTeamDetailsModal(team.id)}
         );
-       
+   
+        const parent = document.querySelector('.team__items');
+        parent.classList.add('active-teams');
+        parent.appendChild(clone);
+    },
+    addAddBtnToDOM(){
+        const itemTemplate = document.getElementById('itemsListTemplate');
+        const clone = itemTemplate.content.cloneNode(true);
+
+        const addBtn = clone.querySelector('.typeBtn');
+        addBtn.style.backgroundColor = `#691010`;
+        addBtn.style.border = `#691010`;
+        addBtn.textContent = `Ajout équipe`; 
+        addBtn.style.color = colorGestion.hexColor('691010');
+        
+        addBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            const modal = document.getElementById('addTeamModal');
+            const teamModal = new bootstrap.Modal(modal);
+            teamModal.show();
+        })
+   
         const parent = document.querySelector('.team__items');
         parent.classList.add('active-teams');
         parent.appendChild(clone);
