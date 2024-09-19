@@ -226,6 +226,7 @@ const teamsModule = {
             console.log(newTeam);
             const modal = bootstrap.Modal.getInstance(document.querySelector('#addTeamModal'));
             modal.hide();
+            teamsModule.showOrHideTeams(event);
         } catch (error) {
             console.log(error); 
         }
@@ -243,6 +244,7 @@ const teamsModule = {
                 console.log(updatedteam);
                 const modal = bootstrap.Modal.getInstance(document.querySelector('#teamDetailModal'));
                 modal.hide();
+                teamsModule.showOrHideTeams(event);
             }
         } catch (error) {
             console.log(error);
@@ -271,9 +273,8 @@ const teamsModule = {
         try {
             teamsApi.removeOneTeam(teamId);
             const modal = bootstrap.Modal.getInstance(document.querySelector('#teamDetailModal'));
-
-            //gérer suppression du DOM
             modal.hide();
+            teamsModule.showOrHideTeams(event);
         } catch (error) {
             console.log(error);
         }
