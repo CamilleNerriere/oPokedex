@@ -1,20 +1,21 @@
-document.querySelector('#bulbizarreName').addEventListener('click', function() {
-    // Affiche la modale Pokémon
-    const pokemonModal = new bootstrap.Modal(document.getElementById('pokemonDetailModal'));
-    pokemonModal.show();
-});
+import {pokemonsModule} from "./pokemons/pokemons.module.js"; 
+import {typesModule} from "./types/types.modules.js";
 
-// Affichage de la modale pour les détails de l'équipe
-document.querySelector('.itemDetailsLink').addEventListener('click', function() {
-    // Affiche la modale d'équipe
-    const teamModal = new bootstrap.Modal(document.getElementById('teamDetailModal'));
-    teamModal.show();
-});
+const app = {
+    async init(e){
+        try {
+            pokemonsModule.init(); 
+            typesModule.init();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
 
-// Affichage ajouter une équipe : 
+document.addEventListener("DOMContentLoaded", app.init); 
 
-document.querySelector('.addTeamBtn').addEventListener('click', function() {
-    // Affiche la modale ajout équipe
-    const addTeamModal = new bootstrap.Modal(document.getElementById('addTeamModal'));
-    addTeamModal.show();
-});
+
+
+
+
+
