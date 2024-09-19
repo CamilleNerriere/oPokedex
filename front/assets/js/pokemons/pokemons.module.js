@@ -33,6 +33,7 @@ const pokemonsModule = {
         img.src = `./assets/img/${pokemon.id}.webp`;
         img.alt = pokemon.name;
 
+    
         //gestion des dataset (id et type)
         const pokemonElement = clone.querySelector('.team__item');
 
@@ -52,6 +53,11 @@ const pokemonsModule = {
         link.href = `http://localhost:3000/pokemons/${pokemon.id}`;
         link.textContent = pokemon.name;
 
+        // gestion affichage des votes
+
+        const voteIcon = clone.querySelector('.pokemon-vote'); 
+        voteIcon.querySelector('.trash-icon').remove();
+        
         clone.querySelector('.pokemon-vote').querySelector('.nb').textContent = pokemon.vote;
         
         // Initialisation listener show details

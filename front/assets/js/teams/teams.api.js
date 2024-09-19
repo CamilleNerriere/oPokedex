@@ -65,7 +65,18 @@ const teamsApi = {
         } else {
             throw addedPokemon;
         }
-    }
+    }, 
+    async removePokemonFromTeamAPI(pokemonId, teamId){
+        const httpResponse = await fetch(`${teamsApi.baseUrl}/${pokemonId}/${teamId}`, {
+            method: "DELETE",
+        });
+        if (httpResponse.ok) {
+            return true;
+        } else {
+            const response = await httpResponse.json();
+            throw response; 
+        }
+    },
 }
 
 export {teamsApi};

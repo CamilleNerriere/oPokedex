@@ -115,8 +115,9 @@ const teamsModule = {
         const teamPokemons = team.pokemons; 
         const listRow = clone.querySelector('.list__pokemons'); 
 
+        const teamId= team.id;
         for (const pokemon of teamPokemons) {
-           const card = teamsModule.createPokemonCard(pokemon);
+           const card = teamsModule.createPokemonCard(pokemon, teamId);
            listRow.appendChild(card);
         }
 
@@ -144,7 +145,7 @@ const teamsModule = {
             })
         }
     }, 
-    createPokemonCard(pokemon){
+    createPokemonCard(pokemon, teamID){
         const pokemonTemplate = document.getElementById("pokemonTemplate"); 
 
         const clone = pokemonTemplate.content.cloneNode(true); 
@@ -152,10 +153,22 @@ const teamsModule = {
         img.src = `./assets/img/${pokemon.id}.webp`;
         img.alt = pokemon.name;
 
+        // icon delete 
+
+        const deleteIcon = clone.querySelector('.pokemon-vote'); 
+        deleteIcon.classList.remove('pokemon-vote');
+
+        deleteIcon.querySelector('.heart-icon').remove();
+        deleteIcon.querySelector('.nb').remove();
+        deleteIcon.classList.add('pokemon-delete');
+
+        deleteIcon.addEventListener('click', () => {teamsModule.removePokemonFromTeam(event)}); 
+
         //gestion des dataset (id et type)
         const pokemonElement = clone.querySelector('.team__item');
 
         pokemonElement.dataset.pokemonId = pokemon.id;
+        pokemonElement.dataset.pokemonTeam = teamID;
         
         const typesData = [];
         const pokemonTypes = pokemon.types;
@@ -171,7 +184,7 @@ const teamsModule = {
         link.href = `http://localhost:3000/pokemons/${pokemon.id}`;
         link.textContent = pokemon.name;
 
-        clone.querySelector('.pokemon-vote').querySelector('.nb').textContent = pokemon.vote;
+    
         
         // Initialisation listener show details
 
@@ -185,9 +198,8 @@ const teamsModule = {
         // récupération du clone 
 
         return(clone);
-        // const parentElement = clone.querySelector('.list-pokemons');
-        // parentElement.appendChild(clone);
     },
+  
     showDetailsModal(){
         const modal = document.getElementById('teamDetailModal');
         const pokemonModal = new bootstrap.Modal(modal);
@@ -225,6 +237,21 @@ const teamsModule = {
             console.log(error);
         }
 
+    }, 
+    removePokemonFromTeam(event){
+        event.preventDefault();
+        const pokemonCard = event.target.closest('.team__item');
+        const pokemonId = pokemonCard.dataset.pokemonId;
+        const teamId = pokemonCard.dataset.pokemonTeam;
+        
+        try {
+            teamsApi.removePokemonFromTeamAPI(pokemonId, teamId); 
+            const modal = bootstrap.Modal.getInstance(document.querySelector('#teamDetailModal'));
+            modal.hide();
+        } catch (error) {
+            console.log(error);
+        }
+        
     }
 }
 

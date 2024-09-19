@@ -108,10 +108,12 @@
         <!-- Template card pokemon -->
 
         <template id="pokemonTemplate">
-            <div class="col-md-3 team__item py-3 position-relative" data-pokemon-id="" data-pokemon-type ="">
+            <div class="col-md-3 team__item py-3 position-relative" data-pokemon-team = "" data-pokemon-id="" data-pokemon-type ="">
                 <img src="./assets/img/1.webp" class="img-fluid" alt="Bulbizarre">
                 <div class="position-absolute w-auto h-auto d-flex justify-content-center align-items-center" style="top: 0; right: 0;">
-                    <a href="#" class="text-dark text-decoration-none m-0 pokemon-vote">&#10084;&#65039; <span class="nb">0</span></a>
+                    <a href="#" class="text-dark text-decoration-none m-0 pokemon-vote">
+                        <span class="trash-icon"><i class="fa-solid fa-trash"></i></span>
+                        <span class="heart-icon">&#10084;&#65039;</span> <span class="nb">0</span></a>
                 </div>
                 <div class="overlay position-absolute w-100 h-25 d-flex justify-content-center align-items-center" style="bottom: 0; left: 0; background-color: rgba(0,0,0,0.5);">
                     <a href="#" class="text-white text-decoration-none m-0 pokemon-link" id="pokemonName"><h5 class="text-white m-0">Bulbizarre</h5></a>
@@ -187,7 +189,7 @@
                              <a href="#" class="teamEdit small text-dark text-decoration-none"><i class="fa-solid fa-pen"></i></a></h6>
                             <!-- le teamEdit vient montrer un formulaire d'édition qu'on va venir dans css pur remove class .hidden et on ajoute hidden à la description -->
                             <form class="text-center edit__form">
-                                <input class="team_id visually-hidden" name="team_id" value="" disabled>
+                                <input class="team_id visually-hidden" name="team_id" value="">
                                 <div class="form-group">
                                 <label class="visually-hidden" for="name">Nom</label>
                                 <input type="text" class="form-control" name="name" placeholder="Nom">
