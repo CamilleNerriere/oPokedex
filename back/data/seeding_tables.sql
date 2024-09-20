@@ -177,7 +177,8 @@ VALUES
   (148, 'Draco', 61, 84, 65, 70, 70, 70),
   (149, 'Dracolosse', 91, 134, 95, 100, 100, 80),
   (150, 'Mewtwo', 106, 110, 90, 154, 90, 130),
-  (151, 'Mew', 100, 100, 100, 100, 100, 100)
+  (151, 'Mew', 100, 100, 100, 100, 100, 100), 
+  (152, 'Arcko', 45, 49, 49, 65, 65, 45)
 ;
 
 -- Reset the ID sequence because we manually inserted the ID in the command before, so the sequence needs an update.
@@ -401,7 +402,8 @@ VALUES
   (149, 3),
   (149, 17),
   (150, 12),
-  (151, 12)
+  (151, 12), 
+  (152, 10)
 ;
 
 INSERT INTO "team" 

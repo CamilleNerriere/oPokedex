@@ -13,10 +13,23 @@ const pokemonsModule = {
             pokemonsModule.displayPokemons(allPokemons); 
 
             // podium 
-            document.getElementById('podiumLink').addEventListener('click', (event) => {pokemonsModule.showPodium(event)});
+            document.getElementById('podiumLink').addEventListener('click', (event) => {
+                pokemonsModule.showPodium(event)});
 
             // voir tous 
-            document.getElementById('showAll').addEventListener('click', (event) => {pokemonsModule.showAll(event)});
+            document.getElementById('showAll').addEventListener('click', (event) => {       
+                const title = document.querySelector('.podium'); 
+                title.classList.add('hidden');
+                pokemonsModule.showAll(event)
+            });
+
+            // retour via pokedex logo
+
+            document.querySelector('.h1').addEventListener('click', (event) => {
+                const title = document.querySelector('.podium'); 
+                title.classList.add('hidden');
+                pokemonsModule.showAll(event)
+            })
 
             // Affichage des pokemons dans la searchbar
             pokemonsModule.displayPokemonsInSearchBar();
@@ -32,6 +45,7 @@ const pokemonsModule = {
             for (const pokemon of pokemons) {
                 pokemonsModule.addPokemonToDOM(pokemon);
             }
+
         } catch(error) {
             console.log(error); 
         }
@@ -245,10 +259,13 @@ const pokemonsModule = {
         const topPokemons = await pokemonsApi.showPodium(); 
         console.log(topPokemons);
         const parentElement = document.querySelector('.list-pokemons');
+        const title = document.querySelector('.podium'); 
+        title.classList.remove('hidden');
         parentElement.innerHTML = ''; 
         pokemonsModule.displayPokemons(topPokemons);
     }, 
     async showAll(){
+        event.preventDefault();
         const pokemons = await pokemonsApi.getPokemons();
         const parentElement = document.querySelector('.list-pokemons');
         parentElement.innerHTML = ''; 
