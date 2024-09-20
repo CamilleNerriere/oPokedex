@@ -44,5 +44,8 @@
     "arrowParens": "avoid",
     "htmlWhitespaceSensitivity": "css",
     "quoteProps": "as-needed"
+  },
+  "dependencies": {
+    "sanitize-html": "^2.13.0"
   }
 }

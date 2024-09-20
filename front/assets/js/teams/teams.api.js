@@ -37,7 +37,6 @@ const teamsApi = {
     }, 
     async updateTeam(data){
         const dataToJSON = JSON.stringify(data);
-        console.log('on passe dans l\'api')
         const httpResponse = await fetch(`${teamsApi.baseUrl}/${data.team_id}`, {
             method: "PATCH",
             headers: {

@@ -2,13 +2,14 @@ import {teamsApi} from "./teams.api.js";
 import {colorGestion} from "../utils/colorGestion.js";
 import {pokemonsModule} from "../pokemons/pokemons.module.js";
 
+import sanitizeHtml from 'sanitize-html';
+
 const teamsModule = {
     init(){
         // event listener pour afficher les teams 
         const teamLink = document.getElementById('teamsLink'); 
         teamLink.addEventListener('click',(event) => {teamsModule.showOrHideTeams(event)});
-        // })
-
+        
     }, 
     async showOrHideTeams(event){
         event.preventDefault();
@@ -235,15 +236,22 @@ const teamsModule = {
         event.preventDefault();
         const form = event.target;
         const formData = new FormData(form); 
-        const data = Object.fromEntries(formData);
-        console.log(data);
+        const rawData = Object.fromEntries(formData);
+        
+        const data = {
+            ...rawData,
+            name: sanitizeHtml(rawData.name),
+            description: sanitizeHtml(rawData.description)
+          };
+          
+
         try {
             if(data.name || data.description){
-                console.log('on est passé par ici')
                 const updatedteam = await teamsApi.updateTeam(data);
-                console.log(updatedteam);
-                const modal = bootstrap.Modal.getInstance(document.querySelector('#teamDetailModal'));
-                modal.hide();
+                const parent = event.target.closest('#teamDetailModal');
+                console.log(parent);
+                parent.querySelector('#teamDescription').textContent = data.description;
+                parent.querySelector('.teamDetailName').textContent = data.name;
                 teamsModule.showOrHideTeams(event);
             }
         } catch (error) {
