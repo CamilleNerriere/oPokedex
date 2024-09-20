@@ -9,14 +9,21 @@ const pokemonsModule = {
         // Afficher tous les pokemons 
         try {
             const allPokemons = await pokemonsApi.getPokemons(); 
-            pokemonsModule.DisplayPokemons(allPokemons); 
+            pokemonsModule.displayPokemons(allPokemons); 
+
+            // podium 
+            document.getElementById('podiumLink').addEventListener('click', (event) => {pokemonsModule.showPodium(event)});
+
+            // voir tous 
+            document.getElementById('showAll').addEventListener('click', (event) => {pokemonsModule.showAll(event)});
+            
         } catch (error) {
             console.log(error);
         }
         
     }, 
 
-    async DisplayPokemons(pokemons){
+    async displayPokemons(pokemons){
         try {
             for (const pokemon of pokemons) {
                 pokemonsModule.addPokemonToDOM(pokemon);
@@ -219,6 +226,20 @@ const pokemonsModule = {
         const previousNbOfVotes = parent.querySelector('#vote');
         const actualNbOfVotes = Number.parseInt(previousNbOfVotes.textContent) + 1; 
         previousNbOfVotes.textContent = JSON.stringify(actualNbOfVotes);
+    }, 
+    async showPodium(event){
+        event.preventDefault();
+        const topPokemons = await pokemonsApi.showPodium(); 
+        console.log(topPokemons);
+        const parentElement = document.querySelector('.list-pokemons');
+        parentElement.innerHTML = ''; 
+        pokemonsModule.displayPokemons(topPokemons);
+    }, 
+    async showAll(){
+        const pokemons = await pokemonsApi.getPokemons();
+        const parentElement = document.querySelector('.list-pokemons');
+        parentElement.innerHTML = ''; 
+        pokemonsModule.displayPokemons(pokemons);
     }
 }; 
 

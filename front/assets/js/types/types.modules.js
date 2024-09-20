@@ -66,7 +66,7 @@ const typesModule = {
         parentElement.innerHTML = ''; 
         try {
             const type = await typesApi.getOneType(id);
-            pokemonsModule.DisplayPokemons(type.pokemons);
+            pokemonsModule.displayPokemons(type.pokemons);
         } catch (error) {
             console.log(error);
         }

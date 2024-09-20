@@ -33,6 +33,15 @@ const pokemonsApi = {
         } else {
             throw newTeam;
         }
+    }, 
+    async showPodium(){
+        const httpResponse = await fetch(`${pokemonsApi.baseUrl}/vote/podium`); 
+        const data = await httpResponse.json(); 
+        if(httpResponse.ok){
+            return data;
+        } else {
+            throw data; 
+        }
     }
 }
 
