@@ -31,12 +31,19 @@
                 <div class="row">
                     <div class="col-md-6 d-flex justify-content-center justify-content-md-start"><h1>Pokedex</h1></div>
                     <div class="col-md-6 d-flex justify-content-center justify-content-md-end">
-                        <select class="form-select mt-2 w-50 w-md-100">
-                            <option>Bulbizarre</option>
-                            <option>Herbizarre</option>
-                            <option>Rondoudou</option>
-                            <option>Pikachu</option>
-                          </select>
+                        <form class="row row-cols-lg-auto g-3 align-items-center search-bar">
+                            
+                            <div class="col-12">
+                              <label class="visually-hidden" for="inlineFormSelectPref">Rechercher</label>
+                              <select class="form-select" name="pokemon" id="inlineFormSelectPref">
+                                <option selected>Rechercher</option>
+                              </select>
+                            </div>
+                                                    
+                            <div class="col-12">
+                              <button type="submit" class="btn btn-primary">Search</button>
+                            </div>
+                          </form>
                     </div>
                 </div>
                 <nav class="container py-2">

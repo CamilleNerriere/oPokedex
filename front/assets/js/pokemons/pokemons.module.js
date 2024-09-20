@@ -16,6 +16,9 @@ const pokemonsModule = {
 
             // voir tous 
             document.getElementById('showAll').addEventListener('click', (event) => {pokemonsModule.showAll(event)});
+
+            // Affichage des pokemons dans la searchbar
+            pokemonsModule.displayPokemonsInSearchBar();
             
         } catch (error) {
             console.log(error);
@@ -193,7 +196,6 @@ const pokemonsModule = {
         console.log(data);
         try {
             if(data.pokemon_id && data.team_id){
-                console.log('on est passé par ici')
                 const addedPokemon = await teamsApi.addPokemonToTeam(data);
                 console.log(addedPokemon);
                 const modal = bootstrap.Modal.getInstance(document.querySelector('#pokemonDetailModal'));
@@ -240,6 +242,25 @@ const pokemonsModule = {
         const parentElement = document.querySelector('.list-pokemons');
         parentElement.innerHTML = ''; 
         pokemonsModule.displayPokemons(pokemons);
+    }, 
+    async displayPokemonsInSearchBar(){
+        const searchBar = document.querySelector('.search-bar');
+        console.log(searchBar);
+        const select = searchBar.querySelector('select[name="pokemon"]'); 
+
+        const pokemons = await pokemonsApi.getPokemons();
+    
+        for (const pokemon of pokemons) {
+            const option = document.createElement('option'); 
+            option.value = pokemon.id;
+            option.textContent = pokemon.name;
+            select.appendChild(option);
+        }    
+        searchBar.addEventListener('submit', (event) => {pokemonsModule.searchPokemon(event)});
+    },
+    async searchPokemon(event){
+        event.preventDefault();
+        console.log(event.target.value);
     }
 }; 
 

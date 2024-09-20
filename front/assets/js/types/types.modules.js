@@ -6,9 +6,6 @@ const typesModule = {
     async init(){
         // event listener afficher les types :
         const typeLink = document.getElementById('typesLink');
-
-        // je vais appeler showOrHideTypes(event)
-        
         typeLink.addEventListener('click', (event) => {typesModule.showOrHideTypes(event)});
     }, 
     async showOrHideTypes(event){
@@ -70,7 +67,8 @@ const typesModule = {
         } catch (error) {
             console.log(error);
         }
-    }
+    },
+
 }
 
 export {typesModule};
