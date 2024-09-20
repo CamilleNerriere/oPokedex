@@ -234,11 +234,22 @@ const teamsModule = {
 
         try {
             const newTeam = await teamsApi.createTeam(data);
-            console.log(newTeam);
-            const modal = bootstrap.Modal.getInstance(document.querySelector('#addTeamModal'));
+
+            const message = "Equipe ajoutée avec succès";
+            const type = "success";
+            alert(message, type);
+            
+            setTimeout(() => {
+                hideAddModal();
+              }, "1500")  
+
+            const hideAddModal = () => {
+                            const modal = bootstrap.Modal.getInstance(document.querySelector('#addTeamModal'));
             modal.hide();
             teamsModule.showOrHideTeams(event);
             teamsModule.showOrHideTeams(event);
+            };
+
         } catch (error) {
             console.log(error); 
         }
@@ -270,6 +281,10 @@ const teamsModule = {
 
             }
         } catch (error) {
+            const message = "Champ manquant ou invalide"
+            const type ="warning";
+            alert(message, type);
+
             console.log(error);
         }
 
