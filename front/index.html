@@ -152,21 +152,23 @@
                                 </li>
                             </ul>
                             </div>
+                            <div id="liveAlertPlaceholder"></div>
                         </div>
                         <div class="modal-footer container position-relative">
 
+                           
 
-                                <form class="form-inline mx-auto mb-3 text-center">
-                                    <input class="pokemon_id visually-hidden" name="pokemon_id" value="">
-                                    <label class="my-1 mr-2 visually-hidden" for="inlineFormCustomSelectPref">Ajouter à l'équipe</label>
-                                    <select class="form-select my-2 mr-sm-2 add-pokemon" name="team_id" id="inlineFormCustomSelectPref">
-                                    <option selected>Ajouter à l'équipe</option>
-                                    </select>
+
+                            <form class="form-inline mx-auto mb-3 text-center">
+                                <input class="pokemon_id visually-hidden" name="pokemon_id" value="">
+                                <label class="my-1 mr-2 visually-hidden" for="inlineFormCustomSelectPref">Ajouter à l'équipe</label>
+                                <select class="form-select my-2 mr-sm-2 add-pokemon" name="team_id" id="inlineFormCustomSelectPref">
+                                <option selected>Ajouter à l'équipe</option>
+                                </select>
                                 
-                                    <button type="submit" class="btn btn-primary my-1 d-block mx-auto">Enregistrer</button>
-                                </form>
-
-                                <a href="#" class="position-absolute bottom-0 end-0 h6 text-dark text-decoration-none pb-2 pe-2 pokemon-vote" data-pokemon-id="">Voter pour lui !  &#10084;&#65039; </a>
+                                <button type="submit" class="btn btn-primary my-1 d-block mx-auto">Enregistrer</button>
+                            </form>
+                            <a href="#" class="position-absolute bottom-0 end-0 h6 text-dark text-decoration-none pb-2 pe-2 pokemon-vote" data-pokemon-id="">Voter pour lui !  &#10084;&#65039; </a>
 
                         </div>
                     </div>
@@ -204,6 +206,8 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-2">Enregistrer</button>
                             </form>
+                            <div id="liveAlertPlaceholder"></div>
+
                             <h5 class="py-3">Pokemons de l'équipe:</h5>
                                 <div class="container py-3">
                                     <div class ="row list__pokemons">

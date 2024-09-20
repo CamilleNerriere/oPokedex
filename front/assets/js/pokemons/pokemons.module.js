@@ -1,5 +1,6 @@
 import {pokemonsApi} from "./pokemons.api.js"; 
 import {colorGestion} from "../utils/colorGestion.js";
+import {alert} from "../utils/alert.js";
 import {teamsApi} from "../teams/teams.api.js";
 
 const pokemonsModule = {
@@ -196,13 +197,23 @@ const pokemonsModule = {
         console.log(data);
         try {
             if(data.pokemon_id && data.team_id){
-                const addedPokemon = await teamsApi.addPokemonToTeam(data);
-                console.log(addedPokemon);
-                const modal = bootstrap.Modal.getInstance(document.querySelector('#pokemonDetailModal'));
-                modal.hide();
+                console.log(data.team_id);
+                const team = await teamsApi.getOneTeam(data.team_id);
+                console.log(team.pokemons.length);
+
+                    const addedPokemon = await teamsApi.addPokemonToTeam(data); 
+                    const message = 'Pokemon ajouté avec succès';
+                    const type = 'success';
+                    
+                    alert(message, type);
+                    console.log(addedPokemon);
+                
+                
             }
         } catch (error) {
-            console.log(error);
+            const message = error.error;
+            const type = 'danger'
+            alert(message, type);
         }
     }, 
     async voteForAPokemonOnMainPage(event){
@@ -261,7 +272,7 @@ const pokemonsModule = {
     async searchPokemon(event){
         event.preventDefault();
         console.log(event.target.value);
-    }
+    }, 
 }; 
 
 export {pokemonsModule}

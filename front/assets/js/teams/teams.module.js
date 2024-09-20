@@ -1,5 +1,6 @@
 import {teamsApi} from "./teams.api.js"; 
 import {colorGestion} from "../utils/colorGestion.js";
+import {alert} from "../utils/alert.js";
 import {pokemonsModule} from "../pokemons/pokemons.module.js";
 
 import sanitizeHtml from 'sanitize-html';
@@ -221,12 +222,22 @@ const teamsModule = {
         event.preventDefault();
         const form = event.target;
         const formData = new FormData(form); 
-        const data = JSON.stringify(Object.fromEntries(formData));
+        const rawData = Object.fromEntries(formData);
+
+        const sanitizedData = {
+            ...rawData,
+            name: sanitizeHtml(rawData.name),
+            description: sanitizeHtml(rawData.description)
+          }; 
+
+        const data = JSON.stringify(sanitizedData);
+
         try {
             const newTeam = await teamsApi.createTeam(data);
             console.log(newTeam);
             const modal = bootstrap.Modal.getInstance(document.querySelector('#addTeamModal'));
             modal.hide();
+            teamsModule.showOrHideTeams(event);
             teamsModule.showOrHideTeams(event);
         } catch (error) {
             console.log(error); 
@@ -253,6 +264,10 @@ const teamsModule = {
                 parent.querySelector('#teamDescription').textContent = data.description;
                 parent.querySelector('.teamDetailName').textContent = data.name;
                 teamsModule.showOrHideTeams(event);
+                const message = "Equipe modifiée avec succès"
+                const type ="success";
+                alert(message, type);
+
             }
         } catch (error) {
             console.log(error);
