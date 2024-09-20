@@ -53,12 +53,15 @@ const pokemonsModule = {
         link.href = `http://localhost:3000/pokemons/${pokemon.id}`;
         link.textContent = pokemon.name;
 
-        // gestion affichage des votes
+        // gestion affichage des votes et listener
 
         const voteIcon = clone.querySelector('.pokemon-vote'); 
         voteIcon.querySelector('.trash-icon').remove();
         
-        clone.querySelector('.pokemon-vote').querySelector('.nb').textContent = pokemon.vote;
+        voteIcon.querySelector('.nb').textContent = pokemon.vote;
+
+        voteIcon.addEventListener('click', (event) => {pokemonsModule.voteForAPokemonOnMainPage(event)});
+
         
         // Initialisation listener show details
 
@@ -152,10 +155,14 @@ const pokemonsModule = {
             console.log(error)
         }
 
+        // listener pour le vote 
+
+        const voteBtn = clone.querySelector('.pokemon-vote');
+        voteBtn.dataset.pokemonId = pokemon.id;
+        voteBtn.addEventListener('click', (event) => {pokemonsModule.voteForAPokemonOnDetailPage(event)});
+
         const parent = document.querySelector('.container');
         parent.appendChild(clone);
-
-
 
     }, 
     clearPokemonDetailsModale() {
@@ -188,6 +195,30 @@ const pokemonsModule = {
         } catch (error) {
             console.log(error);
         }
+    }, 
+    async voteForAPokemonOnMainPage(event){
+        event.preventDefault(); 
+    
+        try {
+            const pokemonId = event.target.closest('.team__item').dataset.pokemonId;        
+            const vote = await pokemonsApi.voteForAPokemon(pokemonId);
+            const nbSpan = event.target.nextElementSibling;              
+            const nb = nbSpan.textContent;
+            const parsedNb = Number.parseInt(nb) + 1;
+            nbSpan.textContent = JSON.stringify(parsedNb);  
+            
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    async voteForAPokemonOnDetailPage(event){
+        event.preventDefault();
+        const pokemonId = event.target.dataset.pokemonId;
+        const vote = await pokemonsApi.voteForAPokemon(pokemonId);
+        const parent = event.target.closest('#pokemonDetailModal');
+        const previousNbOfVotes = parent.querySelector('#vote');
+        const actualNbOfVotes = Number.parseInt(previousNbOfVotes.textContent) + 1; 
+        previousNbOfVotes.textContent = JSON.stringify(actualNbOfVotes);
     }
 }; 
 

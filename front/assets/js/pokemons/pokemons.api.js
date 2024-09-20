@@ -20,6 +20,20 @@ const pokemonsApi = {
             throw data;
         }
     }, 
+    async voteForAPokemon(id){
+        const httpResponse = await fetch(`${pokemonsApi.baseUrl}/vote/${id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        const newTeam = await httpResponse.json();
+        if (httpResponse.ok) {
+            return newTeam;
+        } else {
+            throw newTeam;
+        }
+    }
 }
 
 export {pokemonsApi};
