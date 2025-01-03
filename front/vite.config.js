@@ -14,7 +14,6 @@ export default defineConfig({
         port: 5173,
         host: true,
     },
-    // Ajout des configurations manquantes
     resolve: {
         alias: {
             '@': '/assets',
