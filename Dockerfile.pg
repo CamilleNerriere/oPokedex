@@ -1,0 +1,4 @@
+FROM postgres:latest
+
+COPY ./back/data/create_tables.sql /docker-entrypoint-initdb.d/create_tables.sql
+COPY ./back/data/seeding_tables.sql /docker-entrypoint-initdb.d/seed_tables.sql
