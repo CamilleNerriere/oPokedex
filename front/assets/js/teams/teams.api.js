@@ -1,30 +1,30 @@
 const teamsApi = {
-    baseUrl: "http://localhost:3000/teams/", 
+    baseUrl: `${import.meta.env.VITE_API_URL}/teams/`,
 
-    async getTeams(){
-        const httpResponse = await fetch(teamsApi.baseUrl); 
-        const data = await httpResponse.json(); 
-        if(httpResponse.ok){
-            return data;
-        } else {
-            throw data; 
-        }
-    }, 
-    async getOneTeam(id){
-        const httpResponse = await fetch(teamsApi.baseUrl + '/' + id);
+    async getTeams() {
+        const httpResponse = await fetch(teamsApi.baseUrl);
         const data = await httpResponse.json();
-
-        if(httpResponse.ok){
+        if (httpResponse.ok) {
             return data;
         } else {
             throw data;
         }
     },
-    async createTeam(data){
+    async getOneTeam(id) {
+        const httpResponse = await fetch(teamsApi.baseUrl + '/' + id);
+        const data = await httpResponse.json();
+
+        if (httpResponse.ok) {
+            return data;
+        } else {
+            throw data;
+        }
+    },
+    async createTeam(data) {
         const httpResponse = await fetch(teamsApi.baseUrl, {
-            method: "POST",
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
             },
             body: data,
         });
@@ -34,59 +34,68 @@ const teamsApi = {
         } else {
             throw newTeam;
         }
-    }, 
-    async updateTeam(data){
+    },
+    async updateTeam(data) {
         const dataToJSON = JSON.stringify(data);
-        const httpResponse = await fetch(`${teamsApi.baseUrl}/${data.team_id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: dataToJSON,
-        });
+        const httpResponse = await fetch(
+            `${teamsApi.baseUrl}/${data.team_id}`,
+            {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: dataToJSON,
+            }
+        );
         const newTeam = await httpResponse.json();
         if (httpResponse.ok) {
             return newTeam;
         } else {
             throw newTeam;
         }
-    }, 
-    async addPokemonToTeam(data){
-        const httpResponse = await fetch(`${teamsApi.baseUrl}/${data.pokemon_id}/${data.team_id}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
+    },
+    async addPokemonToTeam(data) {
+        const httpResponse = await fetch(
+            `${teamsApi.baseUrl}/${data.pokemon_id}/${data.team_id}`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
         const addedPokemon = await httpResponse.json();
         if (httpResponse.ok) {
             return addedPokemon;
         } else {
             throw addedPokemon;
         }
-    }, 
-    async removePokemonFromTeamAPI(pokemonId, teamId){
-        const httpResponse = await fetch(`${teamsApi.baseUrl}/${pokemonId}/${teamId}`, {
-            method: "DELETE",
-        });
+    },
+    async removePokemonFromTeamAPI(pokemonId, teamId) {
+        const httpResponse = await fetch(
+            `${teamsApi.baseUrl}/${pokemonId}/${teamId}`,
+            {
+                method: 'DELETE',
+            }
+        );
         if (httpResponse.ok) {
             return true;
         } else {
             const response = await httpResponse.json();
-            throw response; 
+            throw response;
         }
     },
-    async removeOneTeam(teamId){
+    async removeOneTeam(teamId) {
         const httpResponse = await fetch(`${teamsApi.baseUrl}/${teamId}`, {
-            method: "DELETE",
+            method: 'DELETE',
         });
         if (httpResponse.ok) {
             return true;
         } else {
             const response = await httpResponse.json();
-            throw response; 
+            throw response;
         }
-    }
-}
+    },
+};
 
-export {teamsApi};
+export { teamsApi };

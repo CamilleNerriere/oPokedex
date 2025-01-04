@@ -1,26 +1,25 @@
 const typesApi = {
-    baseUrl: "http://localhost:3000/types/",
-    async getTypes(){
-        const httpResponse = await fetch(typesApi.baseUrl); 
+    baseUrl: `${import.meta.env.VITE_API_URL}/types/`,
+    async getTypes() {
+        const httpResponse = await fetch(typesApi.baseUrl);
         const data = await httpResponse.json();
 
-        if(httpResponse.ok){
+        if (httpResponse.ok) {
             return data;
         } else {
             throw data;
         }
     },
-    async getOneType(id){
-        const httpResponse = await fetch(`${typesApi.baseUrl}/${id}`); 
+    async getOneType(id) {
+        const httpResponse = await fetch(`${typesApi.baseUrl}/${id}`);
         const data = await httpResponse.json();
 
-        if(httpResponse.ok){
+        if (httpResponse.ok) {
             return data;
         } else {
             throw data;
         }
-    }
+    },
+};
 
-}
-
-export{typesApi};
+export { typesApi };

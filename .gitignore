@@ -131,3 +131,5 @@ dist
 
 # test CSS Bootstrap 
 ./assets/js/bootstrap-examples.js
+
+nginx/

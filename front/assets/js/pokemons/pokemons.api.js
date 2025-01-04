@@ -1,30 +1,30 @@
 const pokemonsApi = {
-    baseUrl: "http://localhost:3000/pokemons/", 
+    baseUrl: `${import.meta.env.VITE_API_URL}/pokemons/`,
 
-    async getPokemons(){
-        const httpResponse = await fetch(pokemonsApi.baseUrl); 
-        const data = await httpResponse.json(); 
-        if(httpResponse.ok){
-            return data;
-        } else {
-            throw data; 
-        }
-    }, 
-    async getOnePokemon(id){
-        const httpResponse = await fetch(pokemonsApi.baseUrl + '/' + id);
+    async getPokemons() {
+        const httpResponse = await fetch(pokemonsApi.baseUrl);
         const data = await httpResponse.json();
-
-        if(httpResponse.ok){
+        if (httpResponse.ok) {
             return data;
         } else {
             throw data;
         }
-    }, 
-    async voteForAPokemon(id){
+    },
+    async getOnePokemon(id) {
+        const httpResponse = await fetch(pokemonsApi.baseUrl + '/' + id);
+        const data = await httpResponse.json();
+
+        if (httpResponse.ok) {
+            return data;
+        } else {
+            throw data;
+        }
+    },
+    async voteForAPokemon(id) {
         const httpResponse = await fetch(`${pokemonsApi.baseUrl}/vote/${id}`, {
-            method: "PATCH",
+            method: 'PATCH',
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
             },
         });
         const newTeam = await httpResponse.json();
@@ -33,16 +33,16 @@ const pokemonsApi = {
         } else {
             throw newTeam;
         }
-    }, 
-    async showPodium(){
-        const httpResponse = await fetch(`${pokemonsApi.baseUrl}/vote/podium`); 
-        const data = await httpResponse.json(); 
-        if(httpResponse.ok){
+    },
+    async showPodium() {
+        const httpResponse = await fetch(`${pokemonsApi.baseUrl}/vote/podium`);
+        const data = await httpResponse.json();
+        if (httpResponse.ok) {
             return data;
         } else {
-            throw data; 
+            throw data;
         }
-    }
-}
+    },
+};
 
-export {pokemonsApi};
+export { pokemonsApi };
